@@ -42,6 +42,8 @@ export default function Balance() {
 const BalanceWrapper = styled.section`
   display: flex;
   flex-direction: column;
+  margin-top: 1.7rem;
+  margin-bottom: 2rem;
 
   position: absolute;
   bottom: 0;
