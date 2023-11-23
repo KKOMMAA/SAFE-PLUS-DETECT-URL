@@ -6,6 +6,9 @@ const GlobalStyle = createGlobalStyle`
   
   html,
   body {
+    display: flex; 
+    flex-direction: column ;
+    overflow-y : scroll;
     width: 100%;
     height: 100%;
   }
@@ -59,6 +62,11 @@ time, mark, audio, video {
     border: none;
     outline: none;
     padding: 0;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
   }
   
   a {
