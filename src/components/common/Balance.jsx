@@ -5,8 +5,10 @@ import copyIcon from '../../assets/icon/Ic_copy.svg';
 import moreIcon from '../../assets/icon/Ic_more.svg';
 import hideIcon from '../../assets/icon/Ic_hide.svg';
 import splitIcon from '../../assets/icon/ic_balance_menu_split.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Balance() {
+  const navigate = useNavigate();
   return (
     <BalanceWrapper>
       <TopInfoWrapper>
@@ -33,7 +35,7 @@ export default function Balance() {
       <BottomInfoWrapper>
         <button>가져오기</button>
         <img src={splitIcon} alt="메뉴구분" />
-        <button>보내기 </button>
+        <button onClick={() => navigate('/transfer')}>보내기 </button>
       </BottomInfoWrapper>
     </BalanceWrapper>
   );

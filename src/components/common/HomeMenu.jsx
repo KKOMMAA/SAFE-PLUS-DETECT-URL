@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function HomeMenu({ src, desc }) {
+import CancelIcon from '../../assets/icon/Ic_menu_cancel.svg';
+
+export default function HomeMenu({ src, desc, isSetting }) {
   return (
     <MenuContainer>
       <MenuWrapper>
-        <img src={src} />
+        <img src={src} alt="메뉴" />
+        {isSetting && <img src={CancelIcon} alt="메뉴 취소" />}
       </MenuWrapper>
 
       <MenuDesc>{desc}</MenuDesc>
@@ -30,6 +33,10 @@ const MenuWrapper = styled.button`
   border-radius: 1.4rem;
   background: #f9f9fa;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.13);
+
+  >img: nth-of-type(2) {
+
+  }
 `;
 
 const MenuDesc = styled.p`

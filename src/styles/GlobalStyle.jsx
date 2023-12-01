@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex; 
     flex-direction: column ;
     overflow-y : scroll;
-    width: 100%;
+    width: 100vw;
     height: 100%;
   }
 
@@ -35,11 +35,16 @@ time, mark, audio, video {
 	box-sizing: border-box;
 }
 
+dialog {
+  margin: 0 auto;
+}
+
   #root {
     display: flex;
     flex-direction: column;
     max-width: 37.5rem;
-    min-height: 100vh;
+    width: 100vw;
+    min-height: 100%;
     margin: 0 auto;
     position: relative;
   }
