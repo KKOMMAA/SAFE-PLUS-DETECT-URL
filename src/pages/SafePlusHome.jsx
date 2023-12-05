@@ -17,8 +17,16 @@ import alarmIcon from '../assets/icon/Ic_home_alarm.svg';
 import settingBtnIcon from '../assets/icon/Ic_detect_settung.svg';
 import { getCheckFroudAccount } from '../core/getCheckFroudAccount';
 
+import safeIcon from '../assets/icon/Ic_detect_safe.svg';
+import errorIcon from '../assets/icon/Ic_detect_error.svg';
+import warnIcon from '../assets/icon/Ic_detect_warn.svg';
+
+import checkIcon from '../assets/icon/Ic_detect_header.svg';
+
 export default function SafePlusHome() {
   const [isFraud, setIsFraud] = useState();
+  const [detectCount, setDetectCount] = useState(0);
+  const Text = '악성코드 위험이 ';
 
   const handleCheckFraudAccount = async fraudAccount => {
     const res = await getCheckFroudAccount();
@@ -41,6 +49,65 @@ export default function SafePlusHome() {
       </TopWrapper>
 
       <DetectWrapper>
+        <section>
+          <header>
+            악성코드 위험이 <strong> {0}</strong>건 감지되었습니다.
+            <img src={checkIcon} />
+          </header>
+          <article>
+            <img src={safeIcon} />
+
+            <h3>안전</h3>
+
+            <p>안전한 계좌 송금을 실천하고 있네요!</p>
+
+            <DetectResultWrapper>
+              <p>
+                총 <strong> 1</strong>개의{' '}
+              </p>
+              <p>
+                <strong>안전 </strong> 결과가 있습니다.
+              </p>
+            </DetectResultWrapper>
+          </article>
+          <article>
+            <img src={errorIcon} />
+
+            <h3>위험</h3>
+            <p>
+              금융 사기를 당할 수 있습니다. <br />
+              송금시 주의하세요
+              <br />
+              보호자에게 알림을 설정해도 좋을 것 같습니다
+            </p>
+
+            <DetectResultWrapper>
+              <p>
+                총 <strong>{detectCount + 1}</strong>개의{' '}
+              </p>
+              <p>
+                <strong>위험 </strong> 결과가 있습니다.
+              </p>
+            </DetectResultWrapper>
+          </article>
+          <article>
+            <img src={warnIcon} />
+
+            <h3>주의</h3>
+            <p>
+              불분명한 계좌에 송금내역이 많습니다 <br />
+              송금시 주의하세요
+            </p>
+            <DetectResultWrapper>
+              <p>
+                총 <strong> 1</strong>개의{' '}
+              </p>
+              <p>
+                <strong>주의 </strong> 결과가 있습니다.
+              </p>
+            </DetectResultWrapper>
+          </article>
+        </section>
         <button>
           <img src={settingBtnIcon} />
           <p>safe+ 활성화 환경 설정하기</p>
@@ -69,6 +136,7 @@ const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 
   background: linear-gradient(180deg, #e4eaea 0%, #fbfcfc 100%);
 
@@ -104,6 +172,137 @@ const TopWrapper = styled.header`
 `;
 
 const DetectWrapper = styled.div`
+  > section {
+    position: relative;
+
+    > header {
+      width: 27.1rem;
+      height: 2.5rem;
+      position: absolute;
+      top: -1.4rem;
+
+      display: flex;
+      align-items: center;
+      padding-left: 1.2rem;
+
+      border-radius: 1.25rem;
+      border: 2px solid #dd3645;
+      background: #ffe08c;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+
+      > img {
+        position: absolute;
+        right: 0;
+      }
+
+      color: #dd3645;
+      font-size: 0.8rem;
+      font-weight: 700;
+
+      > strong {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    }
+
+    width: 32.3rem;
+    height: 19rem;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    gap: 1.3rem;
+
+    border-radius: 1rem;
+    border: 3px solid #c23536;
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    > article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      > h3 {
+        margin-top: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      > p {
+        text-align: center;
+      }
+    }
+
+    > article:nth-of-type(1) {
+      width: 8.8rem;
+      height: 13.5rem;
+      border-radius: 0.9rem;
+      border: 1px solid #6b953a;
+      background: #6b953a;
+
+      > h3 {
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      > p {
+        font-size: 0.4rem;
+        font-weight: 600;
+      }
+
+      color: #fff;
+      text-align: center;
+      font-size: 0.4rem;
+      font-weight: 600;
+
+      padding-top: 1.5rem;
+    }
+
+    > article:nth-of-type(2) {
+      width: 9.9rem;
+      height: 15.2rem;
+      border-radius: 0.9rem;
+      background: #dd3645;
+
+      > h3 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      > p {
+        font-size: 0.5rem;
+        font-weight: 600;
+      }
+
+      padding-top: 1.3rem;
+    }
+
+    > article:nth-of-type(3) {
+      width: 8.8rem;
+      height: 13.5rem;
+      border-radius: 0.9rem;
+      background: #f4c851;
+
+      color: #fff;
+      text-align: center;
+      font-size: 0.4rem;
+      font-weight: 600;
+
+      padding-top: 1.5rem;
+
+      > h3 {
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      > p {
+        font-size: 0.4rem;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+  }
   > button {
     display: flex;
     justify-content: center;
@@ -148,4 +347,33 @@ const MenuWrapper = styled.section`
   gap: 1.2rem 3.9rem;
   margin-top: 1.6rem;
   margin-bottom: 2.2rem;
+`;
+
+const DetectResultWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  > p {
+    color: #fff;
+  }
+
+  > p:nth-of-type(1) {
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+
+    > strong {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  }
+  > p:nth-of-type(2) {
+    font-size: 0.6rem;
+    font-weight: 600;
+    > strong {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
 `;
