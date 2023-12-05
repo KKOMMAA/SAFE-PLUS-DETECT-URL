@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import CancelIcon from '../../assets/icon/Ic_menu_cancel.svg';
 
-export default function HomeMenu({ src, desc, isSetting }) {
+export default function HomeMenu({ src, desc, isSetting, handleClick }) {
   return (
-    <MenuContainer>
+    <MenuContainer onClick={() => handleClick()}>
       <MenuWrapper>
         <img src={src} alt="메뉴" />
         {isSetting && <img src={CancelIcon} alt="메뉴 취소" />}

@@ -1,15 +1,8 @@
-import React from 'react';
-import accountIcon from '../assets/icon/Ic_homeMenu_account.svg';
-import youngHanaIcon from '../assets/icon/Ic_homeMenu_Younghana.svg';
-import eventIcon from '../assets/icon/Ic_homeMenu_event.svg';
-import stockIcon from '../assets/icon/Ic_homeMenu_stock.svg';
-import fundIcon from '../assets/icon/Ic_homeMenu_fund.svg';
+import React, { useEffect, useState } from 'react';
 import settingIcon from '../assets/icon/Ic_homeMenu_setting.svg';
 import styled from 'styled-components';
 import Balance from '../components/common/Balance';
 import Footer from '../components/common/Footer';
-import divisionLine from '../assets/icon/Ic_home_division.svg';
-import HomeMenu from '../components/common/HomeMenu';
 import leftSlide from '../assets/icon/Ic_home_balance_left.svg';
 import rightSlide from '../assets/icon/Ic_home_balance_right.svg';
 
@@ -20,14 +13,16 @@ import wholeAccountIcon from '../assets/icon/Ic_home_headerAccount.svg';
 import walletIcon from '../assets/icon/Ic_home_wallet.svg';
 import QRIcon from '../assets/icon/Ic_home_QR.svg';
 import alarmIcon from '../assets/icon/Ic_home_alarm.svg';
-import adIcon from '../assets/icon/Ic_home_ad.svg';
-import { useNavigate } from 'react-router-dom';
 
-export default function Home() {
-  const MenuIconSrcs = [accountIcon, youngHanaIcon, eventIcon, stockIcon, fundIcon];
-  const MenuIconDecs = ['전체계좌', '영하나', '이벤트', '주식추천', '펀드'];
+import settingBtnIcon from '../assets/icon/Ic_detect_settung.svg';
+import { getCheckFroudAccount } from '../core/getCheckFroudAccount';
 
-  const navigate = useNavigate();
+export default function SafePlusHome() {
+  const [isFraud, setIsFraud] = useState();
+
+  const handleCheckFraudAccount = async fraudAccount => {
+    const res = await getCheckFroudAccount();
+  };
 
   return (
     <HomeWrapper>
@@ -44,24 +39,24 @@ export default function Home() {
           <img src={alarmIcon} alt="알림" />
         </div>
       </TopWrapper>
-      <p>금융자산을 보호해주는 safe+</p>
+
+      <DetectWrapper>
+        <button>
+          <img src={settingBtnIcon} />
+          <p>safe+ 활성화 환경 설정하기</p>
+        </button>
+
+        <p>
+          📣 버튼을 누르면 보호자 알림, safe+ 활성화 상태 선택, 활성화 계좌 선택 등을 <br />
+          설정할 수 있습니다!
+        </p>
+      </DetectWrapper>
 
       <BalanceWrapper>
         <img src={leftSlide} alt="왼쪽 슬라이드" />
         <Balance />
         <img src={rightSlide} alt="오른쪽 슬라이드" />
       </BalanceWrapper>
-
-      <img src={divisionLine} alt="구분선" />
-
-      <MenuWrapper>
-        {MenuIconSrcs.map((src, index) => (
-          <HomeMenu src={src} desc={MenuIconDecs[index]} key={index} />
-        ))}
-        <HomeMenu src={settingIcon} handleClick={() => navigate('/setting')} desc="맞춤설정" />
-      </MenuWrapper>
-
-      <img src={adIcon} alt="광고" />
 
       <Footer />
     </HomeWrapper>
@@ -70,6 +65,7 @@ export default function Home() {
 
 const HomeWrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,6 +100,36 @@ const TopWrapper = styled.header`
       margin-left: 0.5rem;
       margin-right: 1rem;
     }
+  }
+`;
+
+const DetectWrapper = styled.div`
+  > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.7rem;
+
+    width: 32.2rem;
+    height: 3.7rem;
+
+    border-radius: 1.25rem;
+    background: linear-gradient(180deg, #c63f3c 0%, #f2aa9e 100%);
+
+    > p {
+      color: #191919;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  }
+
+  > p {
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
   }
 `;
 

@@ -1,11 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/common/Header';
 import styled from 'styled-components';
 import ServiceBox from '../components/common/ServiceBox';
 import dividingLine from '../assets/icon/Ic_settings_dividingLine.svg';
+import { registerServiceWorker } from '../utils/notification';
+import { getToken } from 'firebase/messaging';
+import { messaging } from '../core/settingFCM';
+import { useMutation } from '@tanstack/react-query';
+import { patchDeviceToken } from '../core/patchDeviceToken';
+import { postNotificationRequest } from '../core/postNotificationRequest';
 
 export default function Settings() {
   const serviceList = ['전체계좌', '이벤트', '영하나', 'safe+', '주식추천', '펀드'];
+  const [deviceToken, setDeviceToken] = useState({
+    token: '',
+  });
+
+  async function handleAllowNotification() {
+    const permission = await Notification.requestPermission();
+
+    registerServiceWorker();
+
+    const token = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  useEffect(() => {
+    deviceToken?.token !== '' &&
+      deviceToken?.token !== undefined &&
+      patchingDeviceToken(deviceToken?.token);
+    console.log(deviceToken);
+  }, [deviceToken]);
+
+  // 디바이브 토큰 가져오기
+  async function getDeviceToken() {
+    const token = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  const { mutate: patchingDeviceToken } = useMutation({
+    mutationFn: patchDeviceToken,
+    onSuccess: res => {
+      console.log(res);
+    },
+    onError: err => {
+      console.log(err);
+    },
+  });
+
+  function handleShowNotification() {
+    postNotificationRequest(deviceToken.token);
+  }
+
   return (
     <SettingsWrapper>
       <Header title="맞춤 설정" />
@@ -25,7 +81,7 @@ export default function Settings() {
         </ServiceMenuWrapper>
       </ServiceWrapper>
 
-      <SaveButton>저장하기</SaveButton>
+      <SaveButton onClick={() => handleAllowNotification()}>저장하기</SaveButton>
     </SettingsWrapper>
   );
 }
