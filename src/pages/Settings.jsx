@@ -9,12 +9,14 @@ import { messaging } from '../core/settingFCM';
 import { useMutation } from '@tanstack/react-query';
 import { patchDeviceToken } from '../core/patchDeviceToken';
 import { postNotificationRequest } from '../core/postNotificationRequest';
+import { useNavigate } from 'react-router-dom';
 
 export default function Settings() {
   const serviceList = ['전체계좌', '이벤트', '영하나', 'safe+', '주식추천', '펀드'];
   const [deviceToken, setDeviceToken] = useState({
     token: '',
   });
+  const navigate = useNavigate();
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
@@ -78,7 +80,7 @@ export default function Settings() {
 
       <ServiceWrapper>
         <h2>서비스</h2>
-        <ServiceMenuWrapper>
+        <ServiceMenuWrapper onClick={() => navigate('/')}>
           {serviceList.map(service => (
             <ServiceBox isSelected={true} desc={service} key={service} />
           ))}

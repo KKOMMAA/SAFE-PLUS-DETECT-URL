@@ -13,7 +13,7 @@ export default function Footer() {
 
   const navigate = useNavigate();
   return (
-    <FooterWrapper onClick={() => navigate('/home')}>
+    <FooterWrapper onClick={() => navigate('/')}>
       {icons.map((icon, index) => (
         <FooterMenu key={index}>
           <img src={icon} alt="푸터메뉴" />
