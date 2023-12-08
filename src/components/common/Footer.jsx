@@ -5,13 +5,15 @@ import productIcon from '../../assets/icon/Ic_footer_product.svg';
 import assetIcon from '../../assets/icon/Ic_footer_asset.svg';
 import payIcon from '../../assets/icon/Ic_footer_pay.svg';
 import menuIcon from '../../assets/icon/Ic_footer_menu.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
   const icons = [homeIcon, productIcon, assetIcon, payIcon, menuIcon];
   const icon_desc = ['홈', '상품', '자산', '결제', '메뉴'];
 
+  const navigate = useNavigate();
   return (
-    <FooterWrapper>
+    <FooterWrapper onClick={() => navigate('/home')}>
       {icons.map((icon, index) => (
         <FooterMenu key={index}>
           <img src={icon} alt="푸터메뉴" />

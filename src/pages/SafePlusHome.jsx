@@ -15,7 +15,7 @@ import QRIcon from '../assets/icon/Ic_home_QR.svg';
 import alarmIcon from '../assets/icon/Ic_home_alarm.svg';
 
 import settingBtnIcon from '../assets/icon/Ic_detect_settung.svg';
-import { getCheckFroudAccount } from '../core/getCheckFroudAccount';
+import { getCheckFroudAccount, postCheckFroudAccount } from '../core/getCheckFroudAccount';
 
 import safeIcon from '../assets/icon/Ic_detect_safe.svg';
 import errorIcon from '../assets/icon/Ic_detect_error.svg';
@@ -23,15 +23,18 @@ import warnIcon from '../assets/icon/Ic_detect_warn.svg';
 
 import checkIcon from '../assets/icon/Ic_detect_header.svg';
 import { fraudAccount } from '../utils/accountInfo';
+import { useNavigate } from 'react-router-dom';
 
 export default function SafePlusHome() {
   const [isFraud, setIsFraud] = useState();
   const [detectCount, setDetectCount] = useState(0);
   const Text = '악성코드 위험이 ';
 
+  const navigate = useNavigate();
+
   const handleCheckFraudAccount = async () => {
     // const res = await getCheckFroudAccount(fraudAccount);
-    const res = await getCheckFroudAccount('www.naver.com');
+    const res = await postCheckFroudAccount('https://www.kebhana.com/');
     console.log(res);
   };
 
@@ -116,7 +119,7 @@ export default function SafePlusHome() {
           <p>safe+ 활성화 환경 설정하기</p>
         </button>
 
-        <p>
+        <p onClick={() => navigate('/setting')}>
           📣 버튼을 누르면 보호자 알림, safe+ 활성화 상태 선택, 활성화 계좌 선택 등을 <br />
           설정할 수 있습니다!
         </p>
