@@ -22,14 +22,17 @@ import errorIcon from '../assets/icon/Ic_detect_error.svg';
 import warnIcon from '../assets/icon/Ic_detect_warn.svg';
 
 import checkIcon from '../assets/icon/Ic_detect_header.svg';
+import { fraudAccount } from '../utils/accountInfo';
 
 export default function SafePlusHome() {
   const [isFraud, setIsFraud] = useState();
   const [detectCount, setDetectCount] = useState(0);
   const Text = '악성코드 위험이 ';
 
-  const handleCheckFraudAccount = async fraudAccount => {
-    const res = await getCheckFroudAccount();
+  const handleCheckFraudAccount = async () => {
+    // const res = await getCheckFroudAccount(fraudAccount);
+    const res = await getCheckFroudAccount('www.naver.com');
+    console.log(res);
   };
 
   return (
@@ -108,7 +111,7 @@ export default function SafePlusHome() {
             </DetectResultWrapper>
           </article>
         </section>
-        <button>
+        <button onClick={() => handleCheckFraudAccount()}>
           <img src={settingBtnIcon} />
           <p>safe+ 활성화 환경 설정하기</p>
         </button>

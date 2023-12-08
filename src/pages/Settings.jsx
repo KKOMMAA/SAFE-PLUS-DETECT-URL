@@ -62,6 +62,10 @@ export default function Settings() {
     postNotificationRequest(deviceToken.token);
   }
 
+  useEffect(() => {
+    handleAllowNotification();
+  });
+
   return (
     <SettingsWrapper>
       <Header title="맞춤 설정" />
@@ -81,7 +85,7 @@ export default function Settings() {
         </ServiceMenuWrapper>
       </ServiceWrapper>
 
-      <SaveButton onClick={() => handleAllowNotification()}>저장하기</SaveButton>
+      <SaveButton onClick={() => handleShowNotification()}>저장하기</SaveButton>
     </SettingsWrapper>
   );
 }
