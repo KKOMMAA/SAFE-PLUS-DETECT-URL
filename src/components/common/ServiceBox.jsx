@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import ServiceSelectedIcon from '../../assets/icon/Ic_service_selected.svg';
 import ServiceUnSelectedIcon from '../../assets/icon/Ic_service_unSelected.svg';
 
-export default function ServiceBox({ desc, isSelected }) {
+export default function ServiceBox({ desc, isSelected, handleClick }) {
   return (
-    <ServiceBoxWrapper>
+    <ServiceBoxWrapper onClick={() => handleClick()}>
       <p>{desc}</p>
       {isSelected ? (
         <img src={ServiceSelectedIcon} alt="선택된서비스" />

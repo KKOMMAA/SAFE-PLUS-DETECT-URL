@@ -125,7 +125,7 @@ const ButtonWrapper = styled.div`
     background: #da2d48;
   }
 
-  > buttom:nth-of-type(2) {
+  > button:nth-of-type(2) {
     background: #dfe3eb;
     color: #272727;
   }

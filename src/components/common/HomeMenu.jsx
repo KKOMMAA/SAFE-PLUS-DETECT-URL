@@ -26,6 +26,7 @@ const MenuWrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   width: 5.3rem;
   height: 5.1rem;
@@ -35,7 +36,9 @@ const MenuWrapper = styled.button`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.13);
 
   >img: nth-of-type(2) {
-
+    position: absolute;
+    top: -0.5rem;
+    right: -0.2rem;
   }
 `;
 

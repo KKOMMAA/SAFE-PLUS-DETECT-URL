@@ -11,5 +11,6 @@ export async function postNotificationRequest(token) {
     }
   );
 
+  console.log(data);
   return data;
 }

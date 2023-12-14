@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import settingIcon from '../assets/icon/Ic_homeMenu_setting.svg';
 import styled from 'styled-components';
 import Balance from '../components/common/Balance';
 import Footer from '../components/common/Footer';
@@ -15,14 +14,13 @@ import QRIcon from '../assets/icon/Ic_home_QR.svg';
 import alarmIcon from '../assets/icon/Ic_home_alarm.svg';
 
 import settingBtnIcon from '../assets/icon/Ic_detect_settung.svg';
-import { getCheckFroudAccount, postCheckFroudAccount } from '../core/getCheckFroudAccount';
+import { postCheckFroudAccount } from '../core/getCheckFroudAccount';
 
 import safeIcon from '../assets/icon/Ic_detect_safe.svg';
 import errorIcon from '../assets/icon/Ic_detect_error.svg';
 import warnIcon from '../assets/icon/Ic_detect_warn.svg';
 
 import checkIcon from '../assets/icon/Ic_detect_header.svg';
-import { fraudAccount } from '../utils/accountInfo';
 import { useNavigate } from 'react-router-dom';
 
 export default function SafePlusHome() {
@@ -53,11 +51,10 @@ export default function SafePlusHome() {
           <img src={alarmIcon} alt="알림" />
         </div>
       </TopWrapper>
-
       <DetectWrapper>
         <section>
           <header>
-            악성코드 위험이 <strong> {0}</strong>건 감지되었습니다.
+            악성코드 위험이 &nbsp; <strong> {0}</strong>건 감지되었습니다.
             <img src={checkIcon} />
           </header>
           <article>
@@ -114,23 +111,24 @@ export default function SafePlusHome() {
             </DetectResultWrapper>
           </article>
         </section>
-        <button onClick={() => handleCheckFraudAccount()}>
+        <button
+          onClick={() => navigate('/safeplus-setting')}
+          // onClick={() => handleCheckFraudAccount()}
+        >
           <img src={settingBtnIcon} />
           <p>safe+ 활성화 환경 설정하기</p>
         </button>
 
-        <p onClick={() => navigate('/setting')}>
+        <p>
           📣 버튼을 누르면 보호자 알림, safe+ 활성화 상태 선택, 활성화 계좌 선택 등을 <br />
           설정할 수 있습니다!
         </p>
       </DetectWrapper>
-
       <BalanceWrapper>
         <img src={leftSlide} alt="왼쪽 슬라이드" />
         <Balance />
         <img src={rightSlide} alt="오른쪽 슬라이드" />
       </BalanceWrapper>
-
       <Footer />
     </HomeWrapper>
   );

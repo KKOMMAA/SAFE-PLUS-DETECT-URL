@@ -5,10 +5,11 @@ import backIcon from '../../assets/icon/Ic_header_back.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header({ title, backto }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
     <HeaderWrapper>
-      {/* <img src={backIcon} alt="뒤로가기" onClick={() => navigate(backto)} /> */}
+      <img src={backIcon} alt="뒤로가기" onClick={() => navigate(backto)} />
       <h1>{title}</h1>
     </HeaderWrapper>
   );
@@ -28,7 +29,8 @@ const HeaderWrapper = styled.header`
   }
 
   > h1 {
-    width: 7rem;
+    width: 20rem;
+    text-align: center;
     color: #000;
     font-size: 1.8rem;
     font-weight: 600;

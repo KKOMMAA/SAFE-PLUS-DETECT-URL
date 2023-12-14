@@ -10,6 +10,16 @@ import { useMutation } from '@tanstack/react-query';
 import { patchDeviceToken } from '../core/patchDeviceToken';
 import { postNotificationRequest } from '../core/postNotificationRequest';
 import { useNavigate } from 'react-router-dom';
+import HomeMenu from '../components/common/HomeMenu';
+import settingIcon from '../assets/icon/Ic_homeMenu_setting.svg';
+import safePlusIcon from '../assets/icon/Ic_homeMenu_safeplus.svg';
+
+import accountIcon from '../assets/icon/Ic_homeMenu_account.svg';
+import youngHanaIcon from '../assets/icon/Ic_homeMenu_Younghana.svg';
+import eventIcon from '../assets/icon/Ic_homeMenu_event.svg';
+import stockIcon from '../assets/icon/Ic_homeMenu_stock.svg';
+import fundIcon from '../assets/icon/Ic_homeMenu_fund.svg';
+import resetIcon from '../assets/icon/Ic_homeMenu_reset.svg';
 
 export default function Settings() {
   const serviceList = ['전체계좌', '이벤트', '영하나', 'safe+', '주식추천', '펀드'];
@@ -17,6 +27,7 @@ export default function Settings() {
     token: '',
   });
   const navigate = useNavigate();
+  const [isSafePlusAdded, setIsSafePlusAdded] = useState(false);
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
@@ -68,26 +79,53 @@ export default function Settings() {
     handleAllowNotification();
   }, []);
 
+  const handleAddSafePlus = () => {
+    handleShowNotification();
+    setIsSafePlusAdded(prev => !prev);
+  };
+
+  const MenuIconSrcs = [accountIcon, youngHanaIcon, eventIcon, stockIcon, fundIcon];
+  const MenuIconDecs = ['전체계좌', '영하나', '이벤트', '주식추천', '펀드'];
+
   return (
     <SettingsWrapper>
-      <Header title="맞춤 설정" />
+      <Header backto="/" title="맞춤 설정" />
       <MenuDescWrapper>
         <h3>최소 2개 ~ 최대 8개의 메뉴를 선택할 수 있어요.(5/8)</h3>
         <h3>선택한 메뉴 박스를 길게 눌러 위치를 이동할 수 있어요.</h3>
       </MenuDescWrapper>
 
+      <MenuWrapper>
+        {MenuIconSrcs.map((src, index) => (
+          <HomeMenu
+            isSetting={true}
+            src={isSafePlusAdded && index == 4 ? safePlusIcon : src}
+            desc={isSafePlusAdded && index == 4 ? 'safe+' : MenuIconDecs[index]}
+            key={index}
+          />
+        ))}
+        <HomeMenu isSetting={true} src={resetIcon} desc="초기화" />
+      </MenuWrapper>
+
       <img src={dividingLine} alt="구분선" />
 
       <ServiceWrapper>
         <h2>서비스</h2>
-        <ServiceMenuWrapper onClick={() => navigate('/')}>
-          {serviceList.map(service => (
-            <ServiceBox isSelected={true} desc={service} key={service} />
+        <ServiceMenuWrapper>
+          {serviceList.map((service, index) => (
+            <ServiceBox
+              isSelected={
+                (!isSafePlusAdded && index == 3) || (isSafePlusAdded && index == 5) ? false : true
+              }
+              desc={service}
+              key={service}
+              handleClick={handleAddSafePlus}
+            />
           ))}
         </ServiceMenuWrapper>
       </ServiceWrapper>
 
-      <SaveButton onClick={() => handleShowNotification()}>저장하기</SaveButton>
+      <SaveButton onClick={() => navigate('/safeplus-home')}>저장하기</SaveButton>
     </SettingsWrapper>
   );
 }
@@ -156,4 +194,15 @@ const SaveButton = styled.button`
 
   font-size: 1.5rem;
   font-weight: 500;
+`;
+
+const MenuWrapper = styled.section`
+  width: 24rem;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 2.5rem 4rem;
+  margin-top: 3.5rem;
 `;
