@@ -129,7 +129,7 @@ export default function SafePlusHome() {
             onClick={() =>
               setTimeout(() => {
                 handleShowNotification();
-              }, 4000)
+              }, 1000)
             }
           >
             <img src={errorIcon} />
