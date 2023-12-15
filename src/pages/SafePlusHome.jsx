@@ -30,7 +30,7 @@ import { patchDeviceToken } from '../core/patchDeviceToken';
 import { useMutation } from '@tanstack/react-query';
 
 export default function SafePlusHome() {
-  const [isFraud, setIsFraud] = useState();
+  const [isFraud, setIsFraud] = useState(false);
   const [detectCount, setDetectCount] = useState(0);
   const Text = '악성코드 위험이 ';
   const [deviceToken, setDeviceToken] = useState({
