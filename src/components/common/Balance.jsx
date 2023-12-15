@@ -27,7 +27,7 @@ export default function Balance() {
 
       <BalanceInfoWrapper>
         <p>
-          <strong>0</strong>원
+          <strong>100,000,000</strong>원
         </p>
         <img src={hideIcon} alt="숨김" />
       </BalanceInfoWrapper>
