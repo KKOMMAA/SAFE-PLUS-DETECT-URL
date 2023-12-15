@@ -137,9 +137,11 @@ export default function SafePlusHome() {
             </p>
 
             <DetectResultWrapper
-              onClick={setTimeout(() => {
-                handleShowNotification();
-              }, 5000)}
+              onClick={() =>
+                setTimeout(() => {
+                  handleShowNotification();
+                }, 5000)
+              }
             >
               <p>
                 총 <strong>{detectCount}</strong>개의{' '}
