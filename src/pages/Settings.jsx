@@ -75,12 +75,13 @@ export default function Settings() {
     postNotificationRequest(deviceToken.token);
   }
 
-  useEffect(() => {
-    handleAllowNotification();
-  }, []);
+  // useEffect(() => {
+  //   handleAllowNotification();
+  // }, []);
 
   const handleAddSafePlus = () => {
-    handleShowNotification();
+    handleAllowNotification();
+    // handleShowNotification();
     setIsSafePlusAdded(prev => !prev);
   };
 

@@ -31,7 +31,6 @@ export default function SafePlusHome() {
   const navigate = useNavigate();
 
   const handleCheckFraudAccount = async () => {
-    // const res = await getCheckFroudAccount(fraudAccount);
     const res = await postCheckFroudAccount('https://www.kebhana.com/');
     console.log(res);
   };
