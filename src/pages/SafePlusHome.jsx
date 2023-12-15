@@ -125,13 +125,7 @@ export default function SafePlusHome() {
               </p>
             </DetectResultWrapper>
           </article>
-          <article
-            onClick={() =>
-              setTimeout(() => {
-                handleShowNotification();
-              }, 1000)
-            }
-          >
+          <article>
             <img src={errorIcon} />
 
             <h3>위험</h3>
@@ -177,7 +171,13 @@ export default function SafePlusHome() {
           <p>safe+ 활성화 환경 설정하기</p>
         </button>
 
-        <p>
+        <p
+          onClick={() =>
+            setTimeout(() => {
+              handleShowNotification();
+            }, 1000)
+          }
+        >
           📣 버튼을 누르면 보호자 알림, safe+ 활성화 상태 선택, 활성화 계좌 선택 등을 <br />
           설정할 수 있습니다!
         </p>
