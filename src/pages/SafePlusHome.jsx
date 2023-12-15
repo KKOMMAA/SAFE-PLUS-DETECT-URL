@@ -80,8 +80,8 @@ export default function SafePlusHome() {
     },
   });
 
-  function handleShowNotification() {
-    postCheckFroudAccount('https://buly.kr/DPQkc5j');
+  async function handleShowNotification() {
+    const res = await postCheckFroudAccount('https://buly.kr/DPQkc5j');
     setDetectCount(1);
     setIsFraud(true);
   }
