@@ -65,7 +65,7 @@ export default function SafePlusHome() {
 
             <DetectResultWrapper>
               <p>
-                총 <strong> 1</strong>개의{' '}
+                총 <strong> 0</strong>개의{' '}
               </p>
               <p>
                 <strong>안전 </strong> 결과가 있습니다.
@@ -85,7 +85,7 @@ export default function SafePlusHome() {
 
             <DetectResultWrapper>
               <p>
-                총 <strong>{detectCount + 1}</strong>개의{' '}
+                총 <strong>{detectCount}</strong>개의{' '}
               </p>
               <p>
                 <strong>위험 </strong> 결과가 있습니다.
@@ -102,7 +102,7 @@ export default function SafePlusHome() {
             </p>
             <DetectResultWrapper>
               <p>
-                총 <strong> 1</strong>개의{' '}
+                총 <strong> 0</strong>개의{' '}
               </p>
               <p>
                 <strong>주의 </strong> 결과가 있습니다.
@@ -250,7 +250,7 @@ const DetectWrapper = styled.div`
       }
 
       > p {
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         font-weight: 600;
       }
 
@@ -270,12 +270,14 @@ const DetectWrapper = styled.div`
 
       > h3 {
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: 500;
+        text-shadow: -0.7px 0 #fff, 0 0.7px #fff, 0.7px 0 #fff, 0 -0.7px #fff;
       }
 
       > p {
-        font-size: 0.5rem;
+        font-size: 0.53rem;
         font-weight: 600;
+        text-shadow: -0.5px 0 #fff, 0 0.5px #fff, 0.5px 0 #fff, 0 -0.5px #fff;
       }
 
       padding-top: 1.3rem;
@@ -300,7 +302,7 @@ const DetectWrapper = styled.div`
       }
 
       > p {
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         font-weight: 600;
         text-align: center;
       }
