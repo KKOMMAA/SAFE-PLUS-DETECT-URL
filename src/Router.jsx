@@ -8,8 +8,8 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/safeplus-home" element={<SafePlusHome />} />
+        <Route path="/" element={<SafePlusHome />} />
+        {/* <Route path="/safeplus-home" element={<SafePlusHome />} /> */}
         <Route path="/setting" element={<Settings />} />
         <Route path="/safeplus-setting" element={<SafePlusSetting />} />
       </Routes>

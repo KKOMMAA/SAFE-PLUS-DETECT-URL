@@ -44,6 +44,7 @@ const FooterMenu = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
+  margin-bottom: 2rem;
 
   > button {
     background-color: transparent;

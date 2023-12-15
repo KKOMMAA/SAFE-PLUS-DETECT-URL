@@ -22,18 +22,69 @@ import warnIcon from '../assets/icon/Ic_detect_warn.svg';
 
 import checkIcon from '../assets/icon/Ic_detect_header.svg';
 import { useNavigate } from 'react-router-dom';
+import { postNotificationRequest } from '../core/postNotificationRequest';
+import { registerServiceWorker } from '../utils/notification';
+import { getToken } from 'firebase/messaging';
+import { messaging } from '../core/settingFCM';
+import { patchDeviceToken } from '../core/patchDeviceToken';
+import { useMutation } from '@tanstack/react-query';
 
 export default function SafePlusHome() {
   const [isFraud, setIsFraud] = useState();
   const [detectCount, setDetectCount] = useState(0);
   const Text = '악성코드 위험이 ';
+  const [deviceToken, setDeviceToken] = useState({
+    token: '',
+  });
 
   const navigate = useNavigate();
+  async function handleAllowNotification() {
+    const permission = await Notification.requestPermission();
 
-  const handleCheckFraudAccount = async () => {
-    const res = await postCheckFroudAccount('https://www.kebhana.com/');
-    console.log(res);
-  };
+    registerServiceWorker();
+
+    const token = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  useEffect(() => {
+    deviceToken?.token !== '' &&
+      deviceToken?.token !== undefined &&
+      patchingDeviceToken(deviceToken?.token);
+    console.log(deviceToken);
+  }, [deviceToken]);
+
+  // 디바이브 토큰 가져오기
+  async function getDeviceToken() {
+    const token = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  const { mutate: patchingDeviceToken } = useMutation({
+    mutationFn: patchDeviceToken,
+    onSuccess: res => {
+      console.log(res);
+    },
+    onError: err => {
+      console.log(err);
+    },
+  });
+
+  function handleShowNotification() {
+    postCheckFroudAccount('https://buly.kr/DPQkc5j');
+    setDetectCount(1);
+    setIsFraud(true);
+  }
 
   return (
     <HomeWrapper>
@@ -52,10 +103,12 @@ export default function SafePlusHome() {
       </TopWrapper>
       <DetectWrapper>
         <section>
-          <header>
-            악성코드 위험이 &nbsp; <strong> {0}</strong>건 감지되었습니다.
-            <img src={checkIcon} />
-          </header>
+          {isFraud && (
+            <header>
+              악성코드 위험이 &nbsp; <strong> 1</strong>건 감지되었습니다.
+              <img src={checkIcon} />
+            </header>
+          )}
           <article>
             <img src={safeIcon} />
 
@@ -63,7 +116,7 @@ export default function SafePlusHome() {
 
             <p>안전한 계좌 송금을 실천하고 있네요!</p>
 
-            <DetectResultWrapper>
+            <DetectResultWrapper onClick={() => handleAllowNotification()}>
               <p>
                 총 <strong> 0</strong>개의{' '}
               </p>
@@ -83,7 +136,11 @@ export default function SafePlusHome() {
               보호자에게 알림을 설정해도 좋을 것 같습니다
             </p>
 
-            <DetectResultWrapper>
+            <DetectResultWrapper
+              onClick={setTimeout(() => {
+                handleShowNotification();
+              }, 5000)}
+            >
               <p>
                 총 <strong>{detectCount}</strong>개의{' '}
               </p>
