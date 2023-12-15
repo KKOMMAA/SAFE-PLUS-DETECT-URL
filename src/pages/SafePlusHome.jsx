@@ -109,14 +109,14 @@ export default function SafePlusHome() {
               <img src={checkIcon} />
             </header>
           )}
-          <article>
+          <article onClick={() => handleAllowNotification()}>
             <img src={safeIcon} />
 
             <h3>안전</h3>
 
             <p>안전한 계좌 송금을 실천하고 있네요!</p>
 
-            <DetectResultWrapper onClick={() => handleAllowNotification()}>
+            <DetectResultWrapper>
               <p>
                 총 <strong> 0</strong>개의{' '}
               </p>
@@ -129,7 +129,7 @@ export default function SafePlusHome() {
             onClick={() =>
               setTimeout(() => {
                 handleShowNotification();
-              }, 5000)
+              }, 4000)
             }
           >
             <img src={errorIcon} />
