@@ -125,7 +125,13 @@ export default function SafePlusHome() {
               </p>
             </DetectResultWrapper>
           </article>
-          <article>
+          <article
+            onClick={() =>
+              setTimeout(() => {
+                handleShowNotification();
+              }, 5000)
+            }
+          >
             <img src={errorIcon} />
 
             <h3>위험</h3>
@@ -136,13 +142,7 @@ export default function SafePlusHome() {
               보호자에게 알림을 설정해도 좋을 것 같습니다
             </p>
 
-            <DetectResultWrapper
-              onClick={() =>
-                setTimeout(() => {
-                  handleShowNotification();
-                }, 5000)
-              }
-            >
+            <DetectResultWrapper>
               <p>
                 총 <strong>{detectCount}</strong>개의{' '}
               </p>
